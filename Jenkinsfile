@@ -7,20 +7,20 @@ pipeline {
         stage("Compile") {
            
            steps {
-               echo "Compiling..."
+              sh "mvn compile"
            }
         }
         
         stage("Unit test") {
           steps {
-              echo "Teseting"
+              sh "mvn surefire:test"
           }
         }
         
                 
         stage("Package") {
           steps {
-              echo "Packing..."
+              sh "mvn war:war"
           }
         }
         
