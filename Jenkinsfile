@@ -22,8 +22,14 @@ pipeline {
           steps {
               sh "mvn war:war"
           }
+          
+          post {
+              success {
+                  archiveArtifacts artifacts: "target/*.war", fingerprint: true
+              
+          }
         }
-        
+        }
                 
         stage("Deploy") {
           steps {
@@ -31,4 +37,11 @@ pipeline {
           }
         }
     }
+    post {
+        always {
+            sh "mvn clean"
+        }
+    }
+    
+    
 }
